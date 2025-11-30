@@ -17,6 +17,8 @@ phases:
       - echo Build started on `date`
       - echo building the Jar file
       - mvn clean install
+      - echo Listing JAR files in target directory...
+      - ls -la target/*.jar
       - echo Building the Docker image...
       - docker build -t $ECR_REPO_URI:latest .
       - docker tag $ECR_REPO_URI:latest $ECR_REPO_URI:$IMAGE_TAG
@@ -34,5 +36,5 @@ phases:
       - cat imagedefinitions.json
 artifacts:
   files:
-    - target/springboot-aws.jar
+    - target/*.jar
     - imagedefinitions.json
